@@ -1,4 +1,3 @@
-# test-task-python-junior-django
 ## Стек
 
 Python, Django, DRF, coverage, OpenAPI, Docker, Docker-compose, PostgreSQL. 

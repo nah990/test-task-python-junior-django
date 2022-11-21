@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import Http404
 from stations.models import SpaceStation, Pointing
-from .serializers import *
-from rest_framework import generics, serializers
+from .serializers import SpaceStationSerializer, PointingSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse
+from django.db.models import Sum
 # Create your views here.
 
 #generic class-based views (?)
@@ -57,8 +57,19 @@ class SpaceStationDetail(APIView):
         station.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-class PointingDetail(APIView):
-
+    
+class SpaceStationState(APIView):
+    def get_object(self, pk):
+        try:
+            return SpaceStation.objects.get(pk=pk)
+        except SpaceStation.DoesNotExist:
+            raise Http404
+        
+    def get(self, request, pk):
+        station = self.get_object(pk)
+        coordinates = station.get_coordinates()
+        return Response(coordinates)
+        
     def post(self, request):
         serializer = PointingSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

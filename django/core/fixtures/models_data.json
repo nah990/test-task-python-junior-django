@@ -1,0 +1,154 @@
+[
+    
+    {   
+        "model": "stations.SpaceStation",
+        "pk": 1,
+        "fields": {
+          "name": "ISS"
+        }
+    },
+    {   
+        "model": "stations.SpaceStation",
+        "pk": 2,
+        "fields": {
+          "name": "ISS-2"
+        }
+    },
+    {   
+        "model": "stations.SpaceStation",
+        "pk": 3,
+        "fields": {
+          "name": "ISS-3"
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 1,
+        "fields": {
+          "station_id": 1,
+          "user": "Krudener",
+          "axis": "x",
+          "distance": 50
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 2,
+        "fields": {
+          "station_id": 1,
+          "user": "Krudener",
+          "axis": "y",
+          "distance": 25
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 3,
+        "fields": {
+          "station_id": 1,
+          "user": "Krudener",
+          "axis": "z",
+          "distance": -15
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 4,
+        "fields": {
+          "station_id": 1,
+          "user": "Krudener",
+          "axis": "y",
+          "distance": 66
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 5,
+        "fields": {
+          "station_id": 2,
+          "user": "Krudener",
+          "axis": "x",
+          "distance": -150
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 6,
+        "fields": {
+          "station_id": 2,
+          "user": "Krudener",
+          "axis": "y",
+          "distance": -999
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 7,
+        "fields": {
+          "station_id": 2,
+          "user": "Krudener",
+          "axis": "z",
+          "distance": -650
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 8,
+        "fields": {
+          "station_id": 3,
+          "user": "Krudener",
+          "axis": "x",
+          "distance": 162
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 9,
+        "fields": {
+          "station_id": 3,
+          "user": "Krudener",
+          "axis": "x",
+          "distance": 55
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 10,
+        "fields": {
+          "station_id": 3,
+          "user": "Krudener",
+          "axis": "y",
+          "distance": 12
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 11,
+        "fields": {
+          "station_id": 3,
+          "user": "Krudener",
+          "axis": "y",
+          "distance": 24
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 12,
+        "fields": {
+          "station_id": 3,
+          "user": "Krudener",
+          "axis": "y",
+          "distance": -16
+        }
+    },
+    {   
+        "model": "stations.Pointing",
+        "pk": 13,
+        "fields": {
+          "station_id": 3,
+          "user": "Krudener",
+          "axis": "z",
+          "distance": 51
+        }
+    }
+]

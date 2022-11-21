@@ -21,9 +21,15 @@ class SpaceStation(models.Model):
 
 
     def get_coordinates(self):
-        return Pointing.objects.filter(station_id = self.id).values('axis').annotate(coordinate = Sum('distance')).order_by()
+        COORDINATE_BY_DEFAULT = 100
+        coordinates = dict.fromkeys(("x","y","z"), 0)
+        queryset = Pointing.objects.filter(station_id = self.id).values('axis').annotate(coordinate = Sum('distance')).order_by()
+        for pair in [{data.pop("axis"):data.pop("coordinate")} for data in queryset]:
+            coordinates = coordinates | pair            
+        coordinates = [value + COORDINATE_BY_DEFAULT for value in coordinates.values()]
+        return coordinates
     
-
+    
 class Pointing(models.Model):
     station_id = models.ForeignKey(SpaceStation, on_delete=models.SET_NULL, null=True)
     user = models.TextField()

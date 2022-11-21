@@ -16,6 +16,7 @@ class SpaceStationList(APIView):
         serializer = SpaceStationSerializer(stations, many=True)
         return Response(serializer.data)
     
+    
     def post(self, request):
         serializer = SpaceStationSerializer(data=request.data)
         if serializer.is_valid():
@@ -31,10 +32,12 @@ class SpaceStationDetail(APIView):
         except SpaceStation.DoesNotExist:
             raise Http404
     
+    
     def get(self, request, pk, format=None):
         station = self.get_object(pk)
         serializer = SpaceStationSerializer(station)
         return Response(serializer.data)
+
 
     def put(self, request, pk, format=None):
         station = self.get_object(pk)
@@ -44,6 +47,7 @@ class SpaceStationDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    
     def patch(self, request, pk):
         station = self.get_object(pk)
         serializer = SpaceStationSerializer(station, data=request.data, partial=True)
@@ -51,6 +55,7 @@ class SpaceStationDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
     def delete(self, request, pk, format=None):
         station = self.get_object(pk)
@@ -64,14 +69,19 @@ class SpaceStationState(APIView):
             return SpaceStation.objects.get(pk=pk)
         except SpaceStation.DoesNotExist:
             raise Http404
-        
+         
+         
     def get(self, request, pk):
         station = self.get_object(pk)
         coordinates = station.get_coordinates()
         return Response(coordinates)
         
-    def post(self, request):
+        
+    def post(self, request, pk):
+        station = self.get_object(pk)
         serializer = PointingSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        coordinates = station.get_coordinates()
+        
+        return Response(coordinates, status=status.HTTP_201_CREATED)

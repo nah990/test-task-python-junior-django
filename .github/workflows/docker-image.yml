@@ -1,0 +1,44 @@
+name: Django CI/CD Workflow
+
+
+on:
+  pull_request:
+    branches:
+      - main
+
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.10.0]
+        
+    steps:
+    - uses: actions/checkout@v2.4.0
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2.3.1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: actions/checkout@v2.4.0
+    - name: Build the images and start the containers with docker-compose
+      run: |
+        chmod +x ./django/entrypoint.sh
+        docker-compose up --build
+    - name: Init fixture DataBase data
+      working-directory: django
+      run: |
+        docker-compose exec -T test-task-python-junior-django_backend_1 python ./manage.py loaddata /django/core/fixtures/models_data.json
+    - name: Run tests 
+      working-directory: django
+      run: |
+        echo TODO
+    - name: Stop containers
+      if: always()
+      run: docker-compose -f "docker-compose.yml" down

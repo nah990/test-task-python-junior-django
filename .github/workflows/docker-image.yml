@@ -34,7 +34,7 @@ jobs:
     - name: Init fixture DataBase data
       working-directory: django
       run: |
-        docker-compose exec -T test-task-python-junior-django_backend_1 python ./manage.py loaddata /django/core/fixtures/models_data.json
+        docker-compose exec -T backend python ./manage.py loaddata /django/core/fixtures/models_data.json 
     - name: Run tests 
       working-directory: django
       run: |

@@ -74,14 +74,16 @@ class SpaceStationState(APIView):
     def get(self, request, pk):
         station = self.get_object(pk)
         coordinates = station.get_coordinates()
+        station.check_condition(coordinates)
         return Response(coordinates)
         
         
     def post(self, request, pk):
         station = self.get_object(pk)
+        coordinates = station.get_coordinates()
+        station.check_condition(coordinates)
         serializer = PointingSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        coordinates = station.get_coordinates()
         
         return Response(coordinates, status=status.HTTP_201_CREATED)
